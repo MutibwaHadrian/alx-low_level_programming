@@ -1,8 +1,12 @@
+/*
+ * File: 100-print_comb3.c
+ * Auth: Mutibwa Hadrian
+ */
 #include <stdio.h>
 #include <unistd.h>
 /**
- * main - Entyr point
- * Description: prints two digits combination
+ * main - prints all possible different combinations of two digits
+ *
  * Return: Always 0 (success)
  */
 int main(void)
