@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include <unistd.h>
 /**
- * main - Entry point
- * Description: prints numbers
+ * main - prints all possible combinations of single-digit numbers
+ *
  * Return: Always 0 (success)
  */
 int main(void)
