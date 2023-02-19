@@ -1,3 +1,7 @@
+/*
+ * File: 9-print_comb.c
+ * Auth: Mutibwa Hadrian
+ */
 #include <stdio.h>
 #include <unistd.h>
 /**
