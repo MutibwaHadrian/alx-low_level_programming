@@ -2,7 +2,7 @@
 
 /**
  * main - prints _putchar, followed by a new line
- *
+ * is written by mut
  * Return: 0
  */
 
