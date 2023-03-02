@@ -29,3 +29,13 @@ returns a pointer to the resulting string dest
 6-cap_string.c - This function capitalizes all words of a string.
 
 7-leet.c - This function encodes a string into 1337.
+
+100-rot13.c -This function encodes a string using rot13.
+
+101-print_number.c - This function prints an integer.
+
+102-magic.c - This program prints a[2] = 98
+
+103-infinite_add.c - This function adds two numbers.
+
+104-print_buffer.c - This function prints a buffer.
