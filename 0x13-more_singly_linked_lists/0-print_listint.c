@@ -5,20 +5,19 @@
  * print_listint - a funtion to print all elements in a list
  * @h: a head pointer
  *
- * @nodes: number of nodes
  * Return: the number of nodes
  */
 
 size_t print_listint(const listint_t *h)
 {
-	int nodes = 0;
+	int place = 0;
 
 	while (h)
 	{
 
 		printf("%d\n", h->n);
 		h = h->next;
-		nodes++;
+		place++;
 	}
-	return (nodes);
+	return (place);
 }
