@@ -7,8 +7,8 @@ size_t loop_listint_count(listint_t *head);
 size_t free_listint_safe(listint_t **h);
 
 /**
- * loop_listint_count - the  function that counts the number of unique nodes
- *			in a list.
+ * loop_listint_count - the function that counts the number of unique nodes
+ *			in the list.
  * @head: a pointer to the head of the listint_t.
  *
  * Return: If the list is not looped - (0)
