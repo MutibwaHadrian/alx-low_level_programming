@@ -11,7 +11,7 @@ size_t free_listint_safe(listint_t **h);
  *			in a list.
  * @head: a pointer to the head of the listint_t.
  *
- * Return: if the list is not looped - 0
+ * Return: If the list is not looped - (0)
  */
 size_t loop_listint_count(listint_t *head)
 {
@@ -59,7 +59,7 @@ size_t loop_listint_count(listint_t *head)
  * free_listint_safe - a function that frees a listint_t list.
  * @h: a pointer to the head of the listint_t list
  *
- * Return: the size of the list that was free’d.
+ * Return: The size of the list that was free’d.
  *
  * Description: The function sets the head to NULL
  */
