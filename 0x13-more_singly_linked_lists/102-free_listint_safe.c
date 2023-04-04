@@ -7,7 +7,7 @@ size_t loop_listint_count(listint_t *head);
 size_t free_listint_safe(listint_t **h);
 
 /**
- * loop_listint_count - a function that counts the number of unique nodes
+ * loop_listint_count - the  function that counts the number of unique nodes
  *			in a list.
  * @head: a pointer to the head of the listint_t.
  *
@@ -15,7 +15,7 @@ size_t free_listint_safe(listint_t **h);
  */
 size_t loop_listint_count(listint_t *head)
 {
-	
+
 	listint_t *pan, *food;
 	size_t nodes = 1;
 
@@ -32,7 +32,7 @@ size_t loop_listint_count(listint_t *head)
 		if (pan == food)
 		{
 			pan = food;
-			
+
 			while (pan != food)
 			{
 				nodes++;
@@ -41,20 +41,17 @@ size_t loop_listint_count(listint_t *head)
 			}
 
 			pan = pan->next;
-			
+
 			while (pan != food)
 			{
 				nodes++;
 				pan = pan->next;
 			}
-
 			return (nodes);
 		}
-
 		pan = pan->next;
 		food = (food->next)->next;
 	}
-
 	return (0);
 }
 
@@ -75,7 +72,7 @@ size_t free_listint_safe(listint_t **h)
 
 	if (nodes == 0)
 	{
-		
+
 		for (; h != NULL && *h != NULL; nodes++)
 		{
 			value = (*h)->next;
@@ -87,7 +84,7 @@ size_t free_listint_safe(listint_t **h)
 
 	else
 	{
-		
+
 		for (place = 0; place < nodes; place++)
 		{
 			value = (*h)->next;
