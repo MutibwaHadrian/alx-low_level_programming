@@ -15,6 +15,7 @@ size_t free_listint_safe(listint_t **h);
  */
 size_t loop_listint_count(listint_t *head)
 {
+	
 	listint_t *pan, *food;
 	size_t nodes = 1;
 
@@ -31,6 +32,7 @@ size_t loop_listint_count(listint_t *head)
 		if (pan == food)
 		{
 			pan = food;
+			
 			while (pan != food)
 			{
 				nodes++;
@@ -39,6 +41,7 @@ size_t loop_listint_count(listint_t *head)
 			}
 
 			pan = pan->next;
+			
 			while (pan != food)
 			{
 				nodes++;
@@ -72,6 +75,7 @@ size_t free_listint_safe(listint_t **h)
 
 	if (nodes == 0)
 	{
+		
 		for (; h != NULL && *h != NULL; nodes++)
 		{
 			value = (*h)->next;
@@ -83,14 +87,17 @@ size_t free_listint_safe(listint_t **h)
 
 	else
 	{
+		
 		for (place = 0; place < nodes; place++)
 		{
 			value = (*h)->next;
 			free(*h);
 			*h = value;
 		}
+
 		*h = NULL;
 	}
+
 	h = NULL;
 
 	return (nodes);
