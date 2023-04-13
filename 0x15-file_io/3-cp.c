@@ -1,43 +1,66 @@
-#include "main.h"
 #include <stdio.h>
-/**
-  * main - entry point
-  * @ac: argument count
-  * @av: array of argument tokens
-  * Return: 0 on success
-  */
-int main(int ac, char *av[])
+#include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <errno.h>
+
+#define BUFFER_SIZE 1024
+
+void print_error_and_exit(int exit_code, const char *error_message, const char
+*file_name)
 {
-	int fd_from, fd_to, rd_stat, wr_stat;
-	mode_t perm = S_IRUSR | S_IWUSR | S_IWGRP | S_IRGRP | S_IROTH;
-	char buffer[BUFSIZE];
-	if (ac != 3)
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n"), exit(97);
-	fd_from = open(av[1], O_RDONLY);
-	if (fd_from == -1)
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]), exit(98);
-	fd_to = open(av[2], O_CREAT | O_WRONLY | O_TRUNC, perm);
-	if (fd_to == -1)
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]), exit(99);
-	rd_stat = 1;
-	while (rd_stat)
+	dprintf(STDERR_FILENO, error_message, file_name);
+	exit(exit_code);
+}
+
+int main(int argc, char *argv[])
+{
+	if (argc != 3)
 	{
-		rd_stat = read(fd_from, buffer, BUFSIZE);
-		if (rd_stat == -1)
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", av[1]), exit(98);
-		wr_stat = write(fd_to, buffer, rd_stat);
-		if (wr_stat != rd_stat || wr_stat == -1)
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]), exit(99);
-		if (rd_stat > 0)
+		print_error_and_exit(97, "Usage: cp file_from file_to\n", NULL);
+	}
+
+	const char *file_from = argv[1];
+	const char *file_to = argv[2];
+
+	int fd_src = open(file_from, O_RDONLY);
+
+	if (fd_src == -1)
+	{
+		print_error_and_exit(98, "Error: Can't read from file %s\n", file_from);
+	}
+
+	int fd_dest = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, 0664);
+
+	if (fd_dest == -1)
+	{
+		print_error_and_exit(99, "Error: Can't write to %s\n", file_to);
+	}
+
+	char buffer[BUFFER_SIZE];
+	ssize_t bytes_read, bytes_written;
+
+	while ((bytes_read = read(fd_src, buffer, BUFFER_SIZE)) > 0)
+	{
+		bytes_written = write(fd_dest, buffer, bytes_read);
+		if (bytes_written == -1)
 		{
-			wr_stat = write(fd_to, buffer, rd_stat);
-			if (wr_stat != rd_stat || wr_stat == -1)
-				dprintf(STDERR_FILENO, "Error: Can't write to %s\n", av[2]), exit(99);
+			print_error_and_exit(99, "Error:
+					Can't write to %s\n", file_to);
 		}
 	}
-	if (close(fd_from) == -1)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_from), exit(100);
-	if (close(fd_to) == -1)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_to), exit(100);
+
+	if (bytes_read == -1)
+	{
+		print_error_and_exit(98, "Error:
+				Can't read from file %s\n", file_from);
+	}
+
+	if (close(fd_src) == -1 || close(fd_dest) == -1)
+	{
+		print_error_and_exit(100, "Error:
+				Can't close fd %d\n", errno);
+	}
+
 	return (0);
 }
