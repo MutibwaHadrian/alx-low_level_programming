@@ -6,7 +6,7 @@
 #include "main.h"
 
 #define BUF_SIZE 1024
-
+#define PERMISSIONS (S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)
 /**
  * print_error_exit - Prints an error message to the POSIX standard error
  * stream
@@ -45,8 +45,7 @@ void copy_file(const char *file_from, const char *file_to)
 		print_error_exit(98, file_from);
 	}
 
-	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR |
-			S_IRGRP | S_IROTH);
+	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, PERMISSIONS);
 	if (fd_to == -1)
 	{
 		print_error_exit(99, file_to);
